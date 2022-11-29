@@ -1,6 +1,7 @@
+import React from "react";
 import Footer from "./Footer";
 
-const TodoList = ({ todoList, setTodoList, setCompleted, setAll, completed }) => {
+const All = ({ todoList, completed, setTodoList }) => {
 	const handleCheck = (e, id) => {
 		if (e.target.checked) {
 			setTodoList((prevList) => [
@@ -11,11 +12,8 @@ const TodoList = ({ todoList, setTodoList, setCompleted, setAll, completed }) =>
 					return todo;
 				}),
 			]);
-			setTodoList((prevList) => prevList.filter((todo) => todo.id !== id));
-			setCompleted((prevValue) => [...prevValue, ...todoList.filter((todo) => todo.id == id)]);
 		}
 	};
-
 	return (
 		<>
 			<div className="m-1 p-1 rounded-lg h-72 overflow-auto">
@@ -32,10 +30,23 @@ const TodoList = ({ todoList, setTodoList, setCompleted, setAll, completed }) =>
 						</div>
 					);
 				})}
+				{completed.map((todo) => {
+					return (
+						<div className="mt-2 text-slate-600" key={todo.id}>
+							<input
+								type="checkbox"
+								defaultChecked
+								className="inline h-4 w-4 focus:ring-2 focus:ring-blue-500/50"
+							/>
+							<p className=" inline pl-2">{todo.title}</p>
+							<hr />
+						</div>
+					);
+				})}
 			</div>
-			<Footer x={todoList} />
+			<Footer x={todoList} y={completed} />
 		</>
 	);
 };
 
-export default TodoList;
+export default All;

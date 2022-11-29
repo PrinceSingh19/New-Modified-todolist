@@ -1,13 +1,14 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-const Todo = ({ input, setInput, todoList, setTodoList }) => {
+const Todo = ({ input, setInput, setTodoList }) => {
 	const handleChange = (e) => setInput(e.target.value);
 	const addTask = () => {
 		if (input === "") {
 			alert("please enter todo");
 			return;
 		}
-		setTodoList((prevList) => [...prevList, { id: uuidv4(), title: input }]);
+		setTodoList((prevList) => [...prevList, { id: uuidv4(), title: input, completed: false }]);
+
 		setInput("");
 	};
 	return (
