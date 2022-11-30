@@ -1,23 +1,44 @@
 import React from "react";
 import Footer from "./Footer";
-const Completed = ({ completed }) => {
+
+export const Caption = ({ text }) => {
+	return <caption className="text-xs text-slate-400">{text}</caption>;
+};
+
+const Completed = ({ completed, setCompleted }) => {
+	const handleDeleted = (e, id) => {
+		if (e.target.checked === false) {
+			setCompleted((prev) => prev.filter((todo) => todo.id !== id));
+		}
+	};
 	return (
 		<>
 			<div className="m-1 p-1 rounded-lg h-72 overflow-auto">
 				{completed.map((todo) => {
 					return (
-						<div className="mt-2 text-slate-600" key={todo.id}>
-							<input
-								type="checkbox"
-								defaultChecked
-								className="inline h-4 w-4 focus:ring-2 focus:ring-blue-500/50"
-							/>
-							<p className=" inline pl-2">{todo.title}</p>
+						<div key={todo.id}>
+							<div className="mt-2 text-slate-700 flex justify-between items-center">
+								<div className="flex items-center w-2/3 break-all ">
+									<input
+										type="checkbox"
+										className="inline h-4 w-4 focus:ring-2 focus:ring-blue-500/50"
+										defaultChecked
+										onChange={(e) => handleDeleted(e, todo.id)}
+									/>
+									<p className=" inline pl-2">{todo.title}</p>
+								</div>
+								<p className=" inline pl-2 text-xs w-1/3">{todo.date}</p>
+							</div>
 							<hr />
 						</div>
 					);
 				})}
 			</div>
+			{completed.length === 0 ? (
+				<Caption text={"Nothing here"} />
+			) : (
+				<Caption text={"Click on checkbox to deleted permanently"} />
+			)}
 			<Footer x={completed} />
 		</>
 	);

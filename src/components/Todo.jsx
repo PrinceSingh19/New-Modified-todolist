@@ -7,8 +7,10 @@ const Todo = ({ input, setInput, setTodoList }) => {
 			alert("please enter todo");
 			return;
 		}
-		setTodoList((prevList) => [...prevList, { id: uuidv4(), title: input, completed: false }]);
-
+		setTodoList((prevList) => [
+			...prevList,
+			{ id: uuidv4(), title: input, completed: false, date: new Date().toLocaleDateString() },
+		]);
 		setInput("");
 	};
 	return (
@@ -36,7 +38,7 @@ const Todo = ({ input, setInput, setTodoList }) => {
 					className="w-full h-12 rounded-lg pl-10 mt-4 border-2 border-cyan-500  active:border-cyan-400"
 				/>
 				<button
-					className="p-2 h-12 bg-amber-600 mt-4 ml-2 rounded-lg text-stone-50 px-3"
+					className="p-2 h-12 bg-purple-700 mt-4 ml-2 rounded-lg text-stone-50 px-3 hover:bg-purple-900"
 					onClick={addTask}
 				>
 					Add
