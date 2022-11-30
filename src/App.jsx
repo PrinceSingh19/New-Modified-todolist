@@ -28,7 +28,6 @@ function App() {
 	const [input, setInput] = useState("");
 	const [todoList, setTodoList] = useState([...getActive()]);
 	const [completed, setCompleted] = useState([...getCompleted()]);
-	const [all, setAll] = useState([]);
 
 	useEffect(() => {
 		localStorage.setItem("todoActive", JSON.stringify(todoList.flat()));
@@ -37,16 +36,10 @@ function App() {
 
 	return (
 		<>
-			<div className="bg-purple-600 p-1 m-5">
+			<div className="bg-purple-600 p-1 m-2 ">
 				<div className="w-96 p-6 flex flex-col justify-center bg-white">
 					<Header />
-					<Todo
-						input={input}
-						setInput={setInput}
-						todoList={todoList}
-						setTodoList={setTodoList}
-						setAll={setAll}
-					/>
+					<Todo input={input} setInput={setInput} todoList={todoList} setTodoList={setTodoList} />
 					<Routes>
 						<Route path="" element={<Navigate to="/active" />} />
 						<Route
@@ -56,7 +49,6 @@ function App() {
 									todoList={todoList}
 									setTodoList={setTodoList}
 									setCompleted={setCompleted}
-									setAll={setAll}
 									completed={completed}
 								/>
 							}

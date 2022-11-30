@@ -1,7 +1,7 @@
 import Footer from "./Footer";
 import { Caption } from "./Completed";
 
-const TodoList = ({ todoList, setTodoList, setCompleted, setAll, completed }) => {
+const TodoList = ({ todoList, setTodoList, setCompleted }) => {
 	const handleCheck = (e, id) => {
 		if (e.target.checked) {
 			setTodoList((prevList) => [
